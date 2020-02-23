@@ -1,0 +1,2 @@
+# Satellite_communication_software
+用于接收卫星数据和处理数据。
