@@ -16,6 +16,9 @@ public:
     void SaveState();
     void SendSignal();
     void ObtainData(QString data);
+
+    void FillData();
+
 signals:
     void TurntoFirstWindow();
 public slots:

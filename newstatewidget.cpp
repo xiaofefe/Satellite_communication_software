@@ -6,20 +6,21 @@ Newstatewidget::Newstatewidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Newstatewidget)
 {
-    this->setWindowTitle("新建任务状态");
+    //this->setWindowTitle("新建任务状态");
     ui->setupUi(this);
-
+    //设置任务代号字体样式
     ui->lineEdit->setAlignment(Qt::AlignCenter);
     ui->lineEdit_2->setAlignment(Qt::AlignCenter);
-
+    //编码和解码选择数据设置
     QStringList ModulationCodes={"16APSK-LDPC3","16APSK-LDPC4"};
     ui->comboBox->addItems(ModulationCodes);
 
     QStringList DemodulationCodes={"QPSK-LDPC3","QPSK-LDPC4"};
     ui->comboBox_2->addItems(DemodulationCodes);
-
+    //选择编码方式连接函数
     connect(ui->comboBox,SIGNAL(activated(QString)),this,SLOT(doSelectFont(QString)));
     connect(ui->comboBox_2,SIGNAL(activated(QString)),this,SLOT(doSelectFont1(QString)));
+    //想主界面发射信号
     connect(ui->pushButton_2,&QPushButton::clicked,this,&Newstatewidget::SendSignal);
 }
 
@@ -27,7 +28,7 @@ Newstatewidget::~Newstatewidget()
 {
     delete ui;
 }
-
+//ui视图中设置了信号和嘈函数，所以看不到具体连接函数
 void Newstatewidget::on_pushButton_clicked()
 {
     if(ui->comboBox->currentIndex()==0)
@@ -39,7 +40,7 @@ void Newstatewidget::on_pushButton_clicked()
         demodulationstyle=ui->comboBox_2->currentText();
     }
 
-    QMessageBox *mess= new QMessageBox();       ///???建议更换为静态方式获取QMessageBox mess;
+     QMessageBox *mess= new QMessageBox();       //已更换
 
     if(modulationstyle.isEmpty())
    {
@@ -51,24 +52,18 @@ void Newstatewidget::on_pushButton_clicked()
        mess->show();
    }
    else{
-
-        QString Task1=ui->lineEdit->text();
-       //qDebug()<<"Task1"<<Task1;
+       QString Task1=ui->lineEdit->text();
        QString Task2=ui->lineEdit_2->text();
-       //qDebug()<<"Task2"<<Task2;
        Tasknumber=Task1+"-"+Task2;
-       //qDebug()<<"Tasknumber"<<Tasknumber;
 
        sendingpointfre=ui->lineEdit_3->text();
        sendingrate=ui->lineEdit_4->text();
        receivepointfre=ui->lineEdit_5->text();
        receiveingrate=ui->lineEdit_6->text();
-
+       //数据插入
        database db=database();
-       //db.createConnection();
-       //float sendingpointfref=sendingpointfre.toFloat();
+       //数据格式转换
        int sendingratei=sendingrate.toInt();
-       //float receivepointfref=receivepointfre.toFloat();
        int receiveingratei=receiveingrate.toInt();
 
        //added by pan
@@ -79,7 +74,6 @@ void Newstatewidget::on_pushButton_clicked()
            mess->show();
            return ;
        }
-
        bool f=db.insert(Tasknumber,sendingpointfre,modulationstyle,sendingratei,receivepointfre,demodulationstyle,receiveingratei);
        if(f==true)
        {

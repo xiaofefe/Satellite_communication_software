@@ -36,7 +36,6 @@ bool database::createTable()
         return false;
     }
 }
-
 //插入一条记录
 bool database::insert(QString Tasknumber,QString sendingpointfre, QString modulationstyle,int sendingrate,QString receivepointfre,QString demodulationstyle,int receiveingrate)
 {
@@ -61,7 +60,6 @@ bool database::insert(QString Tasknumber,QString sendingpointfre, QString modula
         }
     return true;
 }
-
 //查询所有任务代号信息
 QStringList database::queryTasknumbersAll()
 {
@@ -69,20 +67,17 @@ QStringList database::queryTasknumbersAll()
     QSqlQuery query(db);
     query.exec("select * from TaskDaiHaoTable");
     QSqlRecord rec = query.record();
-
-    qDebug() << QObject::tr("TaskDaiHaoTable表字段数：" ) << rec.count();
-
+    //qDebug() << QObject::tr("TaskDaiHaoTable表字段数：" ) << rec.count();
     QStringList TasknumberList=QStringList();
     while(query.next())
     {
         int i=0;
         QString s=query.value(0).toString();
-        qDebug() << s << " ";
+        //qDebug() << s << " ";
         TasknumberList.insert(i,s);
     }
     return TasknumberList;
 }
-
 //查询数据库中某一记录
 QStringList database::queryByTasknumberAll(QString s)
 {
@@ -115,7 +110,7 @@ QStringList database::queryByTasknumberAll(QString s)
     return TasknumberList;
     }
 }
-
+//查询所有数据
 bool database::queryAll()
 {
 
@@ -130,10 +125,15 @@ bool database::queryAll()
         for(int i=0;i<7;i++)
         {
             QString s=query.value(i).toString();
-            qDebug() << s << " ";
+            TasknumberList.append(s);
+            qDebug() <<TasknumberList<<endl;
         }
 
     }
+//    for(int i=0;i<TasknumberList.length();i++)
+//    {
+//     qDebug() <<"第"<<i<<"条数据"<< TasknumberList[i]<<endl;
+//    }
     return true;
 }
 
@@ -152,10 +152,8 @@ bool database::deleteTableTasknumber()
    else
    {
        qDebug() << "table cleared";
-
        return true;
    }
-
 }
 
 //更新任务表
