@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Mian_images">
+        <file alias="weixin_Main">images/weixin_Main.jpg</file>
+    </qresource>
+</RCC>

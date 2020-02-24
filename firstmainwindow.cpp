@@ -27,7 +27,7 @@ FirstMainWindow::FirstMainWindow(QWidget *parent) :
     dabase=new database();//创建数据库对象
     dabase->createConnection();//连接数据库
     //dabase->deleteTableTasknumber();
-    dabase->createTable();///不需要每一次都创建数据表，第一次就ok
+    //dabase->createTable();///不需要每一次都创建数据表，第一次就ok
     tasknumber=dabase->queryTasknumbersAll();
 
     ui->comboBox->addItems(tasknumber);
@@ -112,11 +112,13 @@ void FirstMainWindow::DoSomethingAboutModiflySignal()
 //跳转新建任务状态界面
 void FirstMainWindow::TurnToSTateNewTaskWidget(){
     this->hide();
+    newStateWi->clearNewStateData();
     newStateWi->show();
 }
 void FirstMainWindow::DoSomethingAboutNewSignal()
 {
     newStateWi->close();
+    //delete newStateWi;
     this->show();
     //更新主界面数据
     ui->comboBox->clear();

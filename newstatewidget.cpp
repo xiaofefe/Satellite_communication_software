@@ -107,4 +107,12 @@ void Newstatewidget::doSelectFont1(QString str)
     demodulationstyle=str;
 
 }
+void Newstatewidget::clearNewStateData(){
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    ui->lineEdit_4->clear();
+    ui->lineEdit_5->clear();
+    ui->lineEdit_6->clear();
+}
 

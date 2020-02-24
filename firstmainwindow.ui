@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>FirstMainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/Mian_images/weixin_Main);
+</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">

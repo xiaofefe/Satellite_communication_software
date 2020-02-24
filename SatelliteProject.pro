@@ -64,4 +64,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    image/weixing_Main.jpg \
     readme.txt
+
+RESOURCES += \
+    images.qrc

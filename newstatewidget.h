@@ -15,6 +15,7 @@ public:
     explicit Newstatewidget(QWidget *parent = nullptr);
     ~Newstatewidget();
      void SendSignal();
+     void clearNewStateData();
 signals:
     void TurntoFirstWindow();
 private slots:
