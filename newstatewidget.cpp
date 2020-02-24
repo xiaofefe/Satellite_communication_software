@@ -8,12 +8,16 @@ Newstatewidget::Newstatewidget(QWidget *parent) :
 {
     this->setWindowTitle("新建任务状态");
     ui->setupUi(this);
+
     ui->lineEdit->setAlignment(Qt::AlignCenter);
     ui->lineEdit_2->setAlignment(Qt::AlignCenter);
+
     QStringList ModulationCodes={"16APSK-LDPC3","16APSK-LDPC4"};
     ui->comboBox->addItems(ModulationCodes);
+
     QStringList DemodulationCodes={"QPSK-LDPC3","QPSK-LDPC4"};
     ui->comboBox_2->addItems(DemodulationCodes);
+
     connect(ui->comboBox,SIGNAL(activated(QString)),this,SLOT(doSelectFont(QString)));
     connect(ui->comboBox_2,SIGNAL(activated(QString)),this,SLOT(doSelectFont1(QString)));
     connect(ui->pushButton_2,&QPushButton::clicked,this,&Newstatewidget::SendSignal);
@@ -34,8 +38,10 @@ void Newstatewidget::on_pushButton_clicked()
     {
         demodulationstyle=ui->comboBox_2->currentText();
     }
-    QMessageBox *mess= new QMessageBox();
-   if(modulationstyle.isEmpty())
+
+    QMessageBox *mess= new QMessageBox();       ///???建议更换为静态方式获取QMessageBox mess;
+
+    if(modulationstyle.isEmpty())
    {
        mess->setText("编码方式为空");
        mess->show();
@@ -45,22 +51,35 @@ void Newstatewidget::on_pushButton_clicked()
        mess->show();
    }
    else{
-       QString Task1=ui->lineEdit->text();
+
+        QString Task1=ui->lineEdit->text();
        //qDebug()<<"Task1"<<Task1;
        QString Task2=ui->lineEdit_2->text();
        //qDebug()<<"Task2"<<Task2;
        Tasknumber=Task1+"-"+Task2;
        //qDebug()<<"Tasknumber"<<Tasknumber;
+
        sendingpointfre=ui->lineEdit_3->text();
        sendingrate=ui->lineEdit_4->text();
        receivepointfre=ui->lineEdit_5->text();
        receiveingrate=ui->lineEdit_6->text();
+
        database db=database();
        //db.createConnection();
        //float sendingpointfref=sendingpointfre.toFloat();
        int sendingratei=sendingrate.toInt();
        //float receivepointfref=receivepointfre.toFloat();
        int receiveingratei=receiveingrate.toInt();
+
+       //added by pan
+       QStringList tmp = db.queryByTasknumberAll(Tasknumber);
+       if(tmp.empty() ==false)
+       {
+           mess->setText("插入失败,Tasknumber重复");
+           mess->show();
+           return ;
+       }
+
        bool f=db.insert(Tasknumber,sendingpointfre,modulationstyle,sendingratei,receivepointfre,demodulationstyle,receiveingratei);
        if(f==true)
        {
@@ -85,13 +104,13 @@ void Newstatewidget::SendSignal()
 void Newstatewidget::doSelectFont(QString str)
 {
 
-         modulationstyle=str;
+    modulationstyle=str;
 
 }
 void Newstatewidget::doSelectFont1(QString str)
 {
 
-         demodulationstyle=str;
+    demodulationstyle=str;
 
 }
 
