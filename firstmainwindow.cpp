@@ -10,8 +10,7 @@ FirstMainWindow::FirstMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FirstMainWindow)
 {
-    ui->setupUi(this);
-
+     ui->setupUi(this);
      stateWi=new StateWidget();
      connect(stateWi,&StateWidget::TurntoFirstWindow,this,&FirstMainWindow::DoSomethingAboutModiflySignal);
      stateWi->close();
@@ -20,9 +19,6 @@ FirstMainWindow::FirstMainWindow(QWidget *parent) :
      connect(newStateWi,&Newstatewidget::TurntoFirstWindow,this,&FirstMainWindow::DoSomethingAboutNewSignal);
      //newStateWi->close();//不需要加close()，这个界面不加载刷新数据
      //newStateWi->show();
-
-
-
     //查询数据库
     dabase=new database();//创建数据库对象
     dabase->createConnection();//连接数据库
@@ -44,7 +40,7 @@ FirstMainWindow::FirstMainWindow(QWidget *parent) :
     //进入主界面
     connect(ui->EnterManageSystemPushButton,&QPushButton::clicked,this,&FirstMainWindow::TurnToManageSystem);
     //回到第一个选择界面
-    connect(&coreWindow,&CoreWindow::CancelSignal,this,&FirstMainWindow::DoSomethingAboutCoreMian);
+    connect(&coreWindow,&corewindowform::CancelSignal,this,&FirstMainWindow::DoSomethingAboutCoreMian);
 
 }
 //任务代号下拉选择确定
@@ -55,10 +51,13 @@ void FirstMainWindow::doSelectFont(QString _str)
 
 void FirstMainWindow::DoSomethingAboutCoreMian()
 {
-    this->show();
-    coreWindow.hide();
-}
 
+    coreWindow.hide();
+    this->show();
+    ui->comboBox->clear();
+    tasknumber=dabase->queryTasknumbersAll();
+    ui->comboBox->addItems(tasknumber);
+}
 //转到管理页面
 void FirstMainWindow::TurnToManageSystem(){
     this->hide();

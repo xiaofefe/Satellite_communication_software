@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include "statewidget.h"
-#include "corewindow.h"
 #include "database.h"
-#include"newstatewidget.h"
+#include "newstatewidget.h"
+#include "corewindowform.h"
 namespace Ui {
 class FirstMainWindow;
 }
@@ -32,7 +32,8 @@ private:
     Ui::FirstMainWindow *ui;
     StateWidget *stateWi;
     Newstatewidget *newStateWi;
-    CoreWindow coreWindow;
+    //CoreWindow coreWindow;
+    corewindowform coreWindow;
     QString Daihao;
     database *dabase;//数据库对象指针
     QStringList tasknumber;//任务代号数据

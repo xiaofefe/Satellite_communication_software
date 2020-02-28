@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,38 +25,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        firstmainwindow.cpp \
+    corewindowform.cpp \
+    main.cpp \
+    devicebutton.cpp \
+    devicestatusform.cpp \
+    linkbutton.cpp \
+    firstmainwindow.cpp \
+    navlistview.cpp \
     statewidget.cpp \
-    devicestatus.cpp \
-    faultdealing.cpp \
-    taskstatus.cpp \
-    performanceandoptimization.cpp \
-    corewindow.cpp \
     database.cpp \
-    newstatewidget.cpp
+    newstatewidget.cpp \
 
 
 HEADERS += \
-        firstmainwindow.h \
+    corewindowform.h \
+    devicebutton.h \
+    devicestatusform.h \
+    firstmainwindow.h \
+    linkbutton.h \
+    navlistview.h \
     statewidget.h \
-    devicestatus.h \
-    faultdealing.h \
-    taskstatus.h \
-    performanceandoptimization.h \
-    corewindow.h \
     database.h \
-    newstatewidget.h
+    newstatewidget.h \
 
 FORMS += \
-        firstmainwindow.ui \
+    corewindowform.ui \
+    devicestatusform.ui \
+    firstmainwindow.ui \
     statewidget.ui \
-    devicestatus.ui \
-    faultdealing.ui \
-    taskstatus.ui \
-    performanceandoptimization.ui \
-    corewindow.ui \
-    newstatewidget.ui
+    newstatewidget.ui \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
