@@ -15,7 +15,7 @@ public:
     database();
 
     //任务代号 数据库
-    bool createConnection();  //创建一个连接
+    QSqlDatabase createConnection();  //创建一个连接
     bool createTable();       //创建数据库表
     bool insert(QString Tasknumber,QString sendingpointfre, QString modulationstyle,int sendingrate,QString receivepointfre,QString demodulationstyle,int receiveingrate);            //插入代号数据
     QStringList queryTasknumbersAll();          //查询所有任务信息

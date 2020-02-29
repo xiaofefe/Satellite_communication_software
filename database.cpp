@@ -5,29 +5,28 @@ database::database()
 
 }
 //建立一个数据库连接
-bool database::createConnection()
+QSqlDatabase database::createConnection()
 {
-    //以后就可以用"sqlite1"与数据库进行连接了
+    //用"sqlite1"与数据库进行连接了
     db = QSqlDatabase::addDatabase("QSQLITE", "sqlite1");
     db.setDatabaseName(".//qtDb.db");
     if(!db.open())
     {
         qDebug() << "无法建立数据库连接";
-        return false;
+        //return ;//优化（1）
     }
-    return true;
+    return db;
 }
 //创建数据库表
 bool database::createTable()
 {
     db = QSqlDatabase::database("sqlite1"); //建立数据库连接
     QSqlQuery query(db);
-   //bool success = query.exec("delete from TaskDaiHaoTable");
-   bool success = query.exec("create table TaskDaiHaoTable(tasknumber varchar(15),sendingpointfre varchar(15),modulationstyle varchar(50),sendingrate int,receivepointfre varchar(15),demodulationstyle varchar(30),receiveingrate int)");
+
+    bool success = query.exec("create table TaskDaiHaoTable(tasknumber varchar(15),sendingpointfre varchar(15),modulationstyle varchar(50),sendingrate int,receivepointfre varchar(15),demodulationstyle varchar(30),receiveingrate int)");
     if(success)
     {
         qDebug() << QObject::tr("数据库表创建成功！\n");
-        //qDebug() << QObject::tr("数据库表删除成功！\n");
         return true;
     }
     else
@@ -96,13 +95,13 @@ QStringList database::queryByTasknumberAll(QString s)
     }else
     {
     QSqlRecord rec = query.record();
-    qDebug() << QObject::tr("TaskDaiHaoTable表字段数：" ) << rec.count();
+    //qDebug() << QObject::tr("TaskDaiHaoTable表字段数：" ) << rec.count();
     while(query.next())
     {
         for(int i=0;i<7;i++)
         {
             QString s=query.value(i).toString();
-            qDebug() << s << "-";
+           // qDebug() << s << "-";
             TasknumberList.insert(i,s);
         }
 

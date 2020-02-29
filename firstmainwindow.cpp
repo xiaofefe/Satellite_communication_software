@@ -17,22 +17,25 @@ FirstMainWindow::FirstMainWindow(QWidget *parent) :
 
      newStateWi=new Newstatewidget();
      connect(newStateWi,&Newstatewidget::TurntoFirstWindow,this,&FirstMainWindow::DoSomethingAboutNewSignal);
-     //newStateWi->close();//不需要加close()，这个界面不加载刷新数据
-     //newStateWi->show();
+
     //查询数据库
     dabase=new database();//创建数据库对象
-    dabase->createConnection();//连接数据库
-    //dabase->deleteTableTasknumber();
-    //dabase->createTable();///不需要每一次都创建数据表，第一次就ok
+    QSqlDatabase db=dabase->createConnection();//创建数据库
+    //dabase->deleteTableTasknumber();//删除数据库表
+    QSqlQuery query(db);
+    if(db.tables().contains("TaskDaiHaoTable"))//判断表是否存在
+    {
+         qDebug()<<"数据表已经创建"<<endl;
+    }else
+    {
+         dabase->createTable();///不需要每一次都创建数据表，第一次就ok
+    }
     tasknumber=dabase->queryTasknumbersAll();
-
     ui->comboBox->addItems(tasknumber);
     //设置comboBox的下拉个数
     ui->comboBox->setMaxVisibleItems(6);
-
     //更换下拉菜单选择项
     connect(ui->comboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(doSelectFont(QString)));
-
     //修改任务状态
     connect(ui->ModifyTaskStatePushButton,&QPushButton::pressed,this,&FirstMainWindow::TurnToSTateModiflyTaskWidget);
     //新建任务状态
