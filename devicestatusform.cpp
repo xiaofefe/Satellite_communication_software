@@ -116,8 +116,5 @@ bool DeviceStatusForm::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }
-
-
-
-
+  return QWidget::eventFilter(watched,event);
 }
