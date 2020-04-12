@@ -33,9 +33,9 @@
     </rect>
    </property>
    <widget class="DeviceStatusForm" name="DeviceStatusPage"/>
-   <widget class="QWidget" name="FaultDealingPage"/>
-   <widget class="QWidget" name="page_4"/>
-   <widget class="QWidget" name="page_2"/>
+   <widget class="FaultDealingform" name="FaultDealingPage"/>
+   <widget class="TaskStatePage" name="taskstatePage"/>
+   <widget class="PerOptForm" name="PerOptPage"/>
   </widget>
   <widget class="QPushButton" name="CancelpushButton">
    <property name="geometry">
@@ -61,6 +61,24 @@
    <class>DeviceStatusForm</class>
    <extends>QWidget</extends>
    <header>devicestatusform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PerOptForm</class>
+   <extends>QWidget</extends>
+   <header>peroptform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TaskStatePage</class>
+   <extends>QWidget</extends>
+   <header>taskstatepage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FaultDealingform</class>
+   <extends>QWidget</extends>
+   <header>faultdealingform.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

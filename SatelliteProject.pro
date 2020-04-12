@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql xml
+QT       += core gui sql xml charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,34 +26,51 @@ CONFIG += c++11
 
 SOURCES += \
     corewindowform.cpp \
+    faultdealingform.cpp \
+    global.cpp \
     main.cpp \
     devicebutton.cpp \
     devicestatusform.cpp \
     linkbutton.cpp \
     firstmainwindow.cpp \
     navlistview.cpp \
+    popselecttasknumber.cpp \
     statewidget.cpp \
-    database.cpp \
     newstatewidget.cpp \
+    peroptform.cpp \
+    database.cpp \
+    inputdatawidget.cpp \
+    taskstatepage.cpp
 
 
 HEADERS += \
     corewindowform.h \
     devicebutton.h \
     devicestatusform.h \
+    faultdealingform.h \
     firstmainwindow.h \
+    global.h \
     linkbutton.h \
     navlistview.h \
+    popselecttasknumber.h \
     statewidget.h \
-    database.h \
     newstatewidget.h \
+    peroptform.h \
+    database.h \
+    inputdatawidget.h \
+    taskstatepage.h
 
 FORMS += \
     corewindowform.ui \
     devicestatusform.ui \
+    faultdealingform.ui \
     firstmainwindow.ui \
+    popselecttasknumber.ui \
     statewidget.ui \
     newstatewidget.ui \
+    peroptform.ui \
+    inputdatawidget.ui \
+    taskstatepage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

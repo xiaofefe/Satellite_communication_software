@@ -4,9 +4,8 @@
 #include <QCursor>
 #include <QDebug>
 #include"database.h"
-
-extern QString globalTasknumber;
-
+#include"global.h"
+//extern QString globalTasknumber;
 StateWidget::StateWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StateWidget)
@@ -103,14 +102,14 @@ void StateWidget::FillData()
     QStringList DemodulationCodes={"QPSK-LDPC3","QPSK-LDPC4"};
     ui->DemodulationCodingcomboBox->addItems(DemodulationCodes);
     //设置界面数据并显示
-    if(!globalTasknumber.isEmpty())
+    if(!globalmessage::globalTasknumber.isEmpty())
    {
-       QStringList list=globalTasknumber.split("-");
+       QStringList list=globalmessage::globalTasknumber.split("-");
        ui->lineEdit->setText(list[0]);
        ui->lineEdit_2->setText(list[1]);
 
        database db=database();//数据库对象
-       QStringList TaskInformation=db.queryByTasknumberAll(globalTasknumber);
+       QStringList TaskInformation=db.queryByTasknumberAll(globalmessage::globalTasknumber);
        qDebug()<<TaskInformation[0];//测试输出数据库数据
 
         if(TaskInformation[0]=="查找失败")

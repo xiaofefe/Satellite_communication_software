@@ -6,6 +6,8 @@
 #include "database.h"
 #include "newstatewidget.h"
 #include "corewindowform.h"
+#include "inputdatawidget.h"
+#include "taskstatepage.h"
 namespace Ui {
 class FirstMainWindow;
 }
@@ -20,11 +22,13 @@ public:
 
     void TurnToSTateNewTaskWidget();
     void TurnToManageSystem();
+    void TurnToInputDataWidget();
 
 
     void DoSomethingAboutModiflySignal();
     void DoSomethingAboutNewSignal();
     void DoSomethingAboutCoreMian();
+    void DoSomethingAboutdataDeal();
     void TurnToSTateModiflyTaskWidget();
 public slots:
      void doSelectFont(QString);
@@ -32,11 +36,12 @@ private:
     Ui::FirstMainWindow *ui;
     StateWidget *stateWi;
     Newstatewidget *newStateWi;
-    //CoreWindow coreWindow;
-    corewindowform coreWindow;
+    corewindowform *coreWindow;
+    InputDataWidget *inputdatawidget;
     QString Daihao;
     database *dabase;//数据库对象指针
     QStringList tasknumber;//任务代号数据
+    TaskStatePage *taskStatePage;
 };
 
 #endif // FIRSTMAINWINDOW_H
